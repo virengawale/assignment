@@ -6,10 +6,29 @@
 
 class Product_TruckController extends Zend_Controller_Action
 {
+    private $product;
+
+    /**
+     * @param string $thsdf
+     * @return array
+     */
+    public function getProductModel(): Product_Model_DbTable_Product
+    {
+        if (!$this->product) {
+            $this->product = new Product_Model_DbTable_Product();
+        }
+
+        return $this->product;
+    }
+
+    public function setProductModel(Product_Model_DbTable_Product $product)
+    {
+            $this->product = $product;
+    }
 
     public function listAction()
     {
-        $productDetail = new Product_Model_DbTable_Product();
+        $productDetail = SELF::getProductModel();
         $result = $productDetail->selectAllProduct();
         $this->view->inventory = $result;
     }
@@ -28,7 +47,7 @@ class Product_TruckController extends Zend_Controller_Action
     public function ordersummaryAction(){
         $productId = $this->_getParam('prod_id');
         if(isset($productId)){
-            $productDetail = new Product_Model_DbTable_Product();
+            $productDetail = SELF::getProductModel();
             $result = $productDetail->orderDetail($productId);
             $this->view->resultCount = count($result);
             $this->view->details = $result;
@@ -64,21 +83,17 @@ class Product_TruckController extends Zend_Controller_Action
                 if($status==true){
                     $this->view->status ='1';
                     $this->view->message = "Order Placed Successfully";
-                }
-                else{
+                } else{
                     $this->view->status = '0';
                     $this->view->message = "Failed to place order";
                 }
-            }
-            else{
+            } else{
                 $this->view->status = '0';
                 $this->view->message = "Already Sold";
             }
-        }
-        else{
+        } else{
             $this->view->status = '0';
             $this->view->message = "Failed to place order1";
         }   
     }
 }
-

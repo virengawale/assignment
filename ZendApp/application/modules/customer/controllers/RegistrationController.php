@@ -9,14 +9,23 @@
 class Customer_RegistrationController extends Zend_Controller_Action
 {
 
-    public function init()
+    private $customer;
+   /**
+     * @param string 
+     * @return array
+     */
+    public function getCustomerModel(): Customer_Model_DbTable_Customer
     {
-        /* Initialize action controller here */
+        if (!$this->customer) {
+            $this->customer = new Customer_Model_DbTable_Customer();
+        }
+
+        return $this->customer;
     }
 
-    public function indexAction()
-    {        
-        // action body
+    public function setCustomerModel(Customer_Model_DbTable_Customer $customer)
+    {
+            $this->customer = $customer;
     }
 
     /**
@@ -32,14 +41,13 @@ class Customer_RegistrationController extends Zend_Controller_Action
 
         if($request->isPost()) {
             if($registerForm->isValid($request->getPost())) {
-                $employeeModel = new Customer_Model_DbTable_Customer();
+                $employeeModel = SELF::getCustomerModel();
                 $status = $employeeModel->createCustomer();
                 if ( !$status ){
                     $message = "Failed";
                     $opstatus = -1;
                 }
                 else{
-                    
                     $message = "Success";
                     $opstatus = 0;
                 }
