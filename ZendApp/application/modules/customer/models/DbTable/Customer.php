@@ -2,6 +2,7 @@
 
 /**
  * Customer_Model_DbTable_Customer class will handle db operations for customer
+ * @module : customer
  */
 class Customer_Model_DbTable_Customer extends Zend_Db_Table_Abstract
 {
@@ -12,14 +13,13 @@ class Customer_Model_DbTable_Customer extends Zend_Db_Table_Abstract
     {
         return Zend_Controller_Front::getInstance();
     }
-   /* public function readAll()
-    {
-        $select = $this->getDefaultAdapter()->select();
-        $select->from($this->_name, '*');
-        return $select;
-    }
-    */
-    
+ 
+    /**
+     * @action : create 
+     * @method : POST
+     * @Exception : 1062 : Email address is already exist
+     * 
+     */
     public function createCustomer()
     {
         $front = $this->getFrontControllerInstance();
@@ -49,10 +49,15 @@ class Customer_Model_DbTable_Customer extends Zend_Db_Table_Abstract
         } catch (Exception $e) {
             if($e->getCode()==1062){
                 return false;
-                    // Dublicate email address
             }
         }
     }
+
+    /**
+     * @param string $password1
+     * @param string $password2
+     * @return bool
+     */
     public function compairePassword($password1,$password2):bool
     {
         if(strcmp($password1,$password2)==0){
@@ -62,28 +67,5 @@ class Customer_Model_DbTable_Customer extends Zend_Db_Table_Abstract
             return false;
         }
     }
-    /*
-    public function editEmployee()
-    {
-        $front = $this->getFrontControllerInstance();
-        $request = $front->getRequest();
-        $data = array(
-            'name' => $request->getPost('name'),
-            'number' => $request->getPost('number'),
-            'designation' => $request->getPost('designation')
-        );
-        $where = array('id = ?' => $request->getParam('id'));
-        $this->update($data, $where);
-    }
-    
-    public function deleteEmployee()
-    {
-        $front = $this->getFrontControllerInstance();
-        $request = $front->getRequest();
-        $where = array('id = ?' => $request->getParam('id'));
-        $this->delete($where);
-    }
-    */
-
 }
 

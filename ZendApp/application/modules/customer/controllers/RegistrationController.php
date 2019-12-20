@@ -1,7 +1,8 @@
 <?php
 
 /**
- * Controller : RegistrationController
+ * @controller : RegistrationController
+ * @module : customer
  * 
  */
 
@@ -20,6 +21,8 @@ class Customer_RegistrationController extends Zend_Controller_Action
 
     /**
      * Register user action
+     * @method GET
+     * @return void
      */
     public function registerAction()
     {   
@@ -39,8 +42,6 @@ class Customer_RegistrationController extends Zend_Controller_Action
                     
                     $message = "Success";
                     $opstatus = 0;
-                   // self::registrationEmail();
-                   // $this->redirect('customer/auth/login');
                 }
             }
             else{
@@ -53,12 +54,6 @@ class Customer_RegistrationController extends Zend_Controller_Action
         $this->view->registerForm = $registerForm;
         $this->_helper->layout()->disableLayout();
     }
-    /**
-     *  
-     */
-    public function emailAction()
-    {
-    }
-
+    
 }
 

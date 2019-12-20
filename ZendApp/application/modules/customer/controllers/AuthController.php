@@ -1,10 +1,15 @@
 <?php
 
+/**
+ * @module : customer
+ * @controller : Auth
+ */
 class Customer_AuthController extends Zend_Controller_Action
 {
     /**
     * Customer login Action
     * Redirect on success
+    * @action login
     * @return void
     */
     public function loginAction()
@@ -39,26 +44,8 @@ class Customer_AuthController extends Zend_Controller_Action
             if ($result->isValid()) {
                 $this->view->message='Success';
                 $this->_helper->FlashMessenger('Successful Login');
-
-            /* 
-                $acl =  new Zend_Acl();
-                //setup the various roles in our system
-                $acl->addRole('guest');
-                // owner inherits all of the rules of guest
-                $acl->addRole('owner', 'guest');
-                
-                // add the resources
-                $acl->addResource('blogPost');
-                
-                // add privileges to roles and resource combinations
-                $acl->allow('guest', 'blogPost', 'view');
-                $acl->allow('owner', 'blogPost', 'post');
-                $acl->allow('owner', 'blogPost', 'publish');
-            */
-
-                $this->_redirect('/');
-                return;
-            }
+                $this->_redirect('product/truck/list');
+             }
             else{
                 $this->view->message = 'Failed';
             }
@@ -66,8 +53,7 @@ class Customer_AuthController extends Zend_Controller_Action
         }
         $this->view->loginForm = $loginForm;
         $this->_helper->layout()->disableLayout(); 
-       // $this->_helper->viewRenderer->setNoRender(true);
-    }
+     }
 }
 
 ?>

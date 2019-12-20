@@ -1,23 +1,11 @@
 <?php
 
 /**
- * Controller : RegistrationController
- * 
+ * @controller RegistrationController
  */
 
 class Product_TruckController extends Zend_Controller_Action
 {
-
-    public function init()
-    {
-        /* Initialize action controller here */
-    }
-
-    public function indexAction()
-    {        
-        // action body
-
-    }
 
     public function listAction()
     {
@@ -26,11 +14,22 @@ class Product_TruckController extends Zend_Controller_Action
         $this->view->inventory = $result;
     }
 
+     /**
+     * @route product/truck/ordersummary/prod_id/<<prod_id>>
+     * @method GET
+     * 
+     * Display summary information of product
+     *
+     * If any exception, 500 will be returned
+     * 
+     * @return void
+     */
+
     public function ordersummaryAction(){
-        $prodcutId = $this->_getParam('prod_id');
-        if(isset($prodcutId)){
+        $productId = $this->_getParam('prod_id');
+        if(isset($productId)){
             $productDetail = new Product_Model_DbTable_Product();
-            $result = $productDetail->orderDetail($prodcutId);
+            $result = $productDetail->orderDetail($productId);
             $this->view->resultCount = count($result);
             $this->view->details = $result;
 
@@ -39,6 +38,18 @@ class Product_TruckController extends Zend_Controller_Action
                 echo "Order symmary  failed";
         }   
     }
+
+     /**
+     * @route product/truck/orderprocess/prod_id/<<prod_id>>
+     * @method GET
+     * 
+     * Process order
+     *
+     * If any exception, 500 will be returned
+     * 
+     * @return void
+     */
+    
     public function orderprocessAction()
     {
         $productId = $this->_getParam('prod_id');
@@ -69,13 +80,5 @@ class Product_TruckController extends Zend_Controller_Action
             $this->view->message = "Failed to place order1";
         }   
     }
-
-    /**
-     *  
-     */
-    public function emailAction()
-    {
-    }
-
 }
 
