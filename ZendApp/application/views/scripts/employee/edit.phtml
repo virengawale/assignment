@@ -1,0 +1,14 @@
+<html>
+     <head>
+     <title>Update Employee</title>
+     </head>
+     <body>
+          <h1>Update Employee Record</h1>
+          <form action='' method="POST">
+               <?php echo $this->employeeForm->getElement('name')->setValue($this->employee->name); ?>
+               <?php echo $this->employeeForm->getElement('number')->setValue($this->employee->number); ?>
+               <?php echo $this->employeeForm->getElement('designation')->setValue($this->employee->designation); ?>
+               <?php echo $this->employeeForm->getElement('submit')->setLabel('Update Employee'); ?>
+          </form>
+     </body>
+</html>

@@ -1,0 +1,17 @@
+<html>
+     <head>
+          <title>Register</title>
+     </head>
+     <body>
+          <h4>Register</h4>
+         <?php echo $this->message; ?>
+     <form action='' method="POST">
+          <?php echo $this->registerForm->getElement('name'); ?>
+          <?php echo $this->registerForm->getElement('email'); ?>
+          <?php echo $this->registerForm->getElement('password'); ?>
+          <?php echo $this->registerForm->getElement('repassword'); ?>
+          <?php echo $this->registerForm->getElement('submit'); ?>
+     </form>
+     <a href="../../auth/login">Click Here to login</a>
+     </body>
+</html>

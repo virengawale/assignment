@@ -1,0 +1,44 @@
+<html>
+     <head>
+          <title>Register</title>
+     </head>
+     <body>
+          <style>
+               table, td, th,tr {
+               border: 1px solid black;
+               width: 300px;
+               align-items: center;
+               }
+          </style>
+              
+     <table style='width:100%'> 
+               <tr>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>year Of Purchase</th>
+                    <th>Prise</th>
+                    <th>Color</th>
+                    <th>Status</th>
+                    <th>Condition</th>
+                    <th>Action</th>
+               </tr>
+               <?php foreach($this->inventory as $product){?>
+               <tr>
+                    <td> <?=$product['brand']?></td>
+                    <td> <?=$product['model']?></td>
+                    <td> <?=$product['year_of_purchase']?></td>
+                    <td> <?=$product['prise'].' $ '?></td>
+                    <td> <?=$product['color']?></td>
+                    <td> <?=$product['status']?></td>
+                    <td> <?=$product['prod_condition']?></td>
+                    
+                    <td> <?php if($product['status']==0){?> <button onclick="location.href='ordersummary/prod_id/<?=$product['id']?>'">BUY</button><?php }?></td>
+               
+               </tr>
+
+     <?php } ?>
+
+     </table>
+
+     </body>
+</html>

@@ -1,0 +1,47 @@
+<h3>Order Summary</h3>
+
+<?php 
+    
+    if($this->resultCount>=1){
+    $result = $this->details[0];
+?>
+    <table width="20%">
+        <tr>
+            <td>Brand</td>
+            <td><?=$result['brand']?></td>
+        </tr>
+        <tr>
+            <td>Model</td>
+            <td><?=$result['model']?></td>
+        </tr>
+        <tr>
+            <td>Year Of Purchase</td>
+            <td><?=$result['year_of_purchase']?></td>
+        </tr>
+        <tr>
+            <td>Running</td>
+            <td><?=$result['runnning']?></td>
+        </tr>
+        <tr>
+            <td>Color</td>
+            <td><?=$result['color']?></td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td><?=$result['status']?></td>
+        </tr>
+        <tr>
+            <td>Prise</td>
+            <td><?=$result['prise'].' $'?></td>
+        </tr>
+        <tr>
+            <td>Product condition</td>
+            <td><?=$result['prod_condition']?></td>
+        </tr>
+    </table>
+    <button onclick="location.href='../../orderprocess/prod_id/<?=$result['id']?>';"> Continue </button>
+<?php
+}else{
+    echo "<h2>Wrong input   </2>";
+}
+?>

@@ -1,0 +1,29 @@
+<html>
+     <head>
+     <title>Employees</title>
+     </head>
+     <body>
+          <h1>Employee List</h1>
+          <table>
+          <tr>
+               <th>Name</th>
+               <th>Contact Number</th>
+               <th>Designation</th>
+               <th colspan="2">Action</th>
+         </tr>
+ 
+         <?php
+              foreach ($this->data as $employee) {                  
+                    echo "<tr>";
+                    echo "<td>" . $employee['name'] . "</td>";
+                    echo "<td>" . $employee['number'] . "</td>";
+                    echo "<td>" . $employee['designation'] . "</td>";
+                    echo "<td colspan='2'><a href='" . $this->url(array('controller' => 'employee', 'action' => 'edit', 'id' => $employee['id'])) . "' >Edit</a>";
+                    echo " <a href='" . $this->url(array('controller' => 'employee', 'action' => 'delete', 'id' => $employee['id'])) . "' onclick='return confirm(\"Do you really want to delete this Employee?\");'>Delete</a></td>";
+                    echo "</tr>";
+             }
+       ?>
+       </table>
+       <?php echo $this->paginationControl($this->data, 'Sliding', 'pagination_controls.phtml'); ?>
+     </body>
+</html>
